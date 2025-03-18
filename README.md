@@ -12,7 +12,7 @@ Utilizarea aplicatiei:
 O persoana va crea activitatea, ii va pune un nume si o descriere, va adauga locatia, data si ora, iar apoi va fixa un buget aproximativ.
 
 Proiectul va fi realizat in:
-- front-end: React
+- front-end: React/HTML/CSS
 - back-end: Java/C#
 - baza de date: SQL
 
