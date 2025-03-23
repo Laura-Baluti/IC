@@ -8,7 +8,7 @@ Aplicatia implica si un sistem de rating pentru notite, dar si pentru utilizator
 II) Limbajele folosite:
 
 Proiectul va fi realizat in:
-- front-end: React
+- front-end: React/HTML/CSS
 - back-end: Java/C#
 - baza de date: SQL
 - featur-uri aditionale (learning plan) implementate cu AI
