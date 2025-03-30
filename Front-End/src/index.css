@@ -1,0 +1,86 @@
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+.navbar {
+  background-color: #faf6f2;
+  color: #da7b93;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-size: 18px;
+}
+.navbar a {
+  color:#da7b93;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 3px;
+  transition: color 1s ease;
+}
+
+.navbar a:hover {
+  background-color: #efece9;
+  color: #2e151b;
+}
+
+.profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.profile-text {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 3px;
+  transition: color 1s ease;
+}
+
+.profile-text:hover {
+  background-color: #efece9;
+  color: #2e151b;
+}
+
+/* Dropdown Menu */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: none;
+  background-color: #376e6f;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  min-width: 160px;
+  z-index: 10; /* Pt a fi deasupra altor elemente */
+  border-radius: 3px;
+}
+
+.profile-container:hover .dropdown {
+  display: block; /* Afișează dropdown-ul când treci cu mouse-ul pe Profil */
+}
+
+.dropdown-content a {
+  color: #faf6f2;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: block;
+  border-bottom: 3px solid #faf6f2;
+  transition: background-color 1s ease;
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none; /* Îndepărtează border-ul de la ultimul link */
+}
+
+.dropdown-content a:hover {
+  color:#faf6f2;
+  background-color: #699ea1;
+}
