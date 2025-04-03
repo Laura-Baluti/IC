@@ -9,8 +9,8 @@ II) Limbajele folosite:
 
 Proiectul va fi realizat in:
 - front-end: React/HTML/CSS
-- back-end: Java/C#
-- baza de date: SQL
+- back-end: Java
+- baza de date: MongoDB
 - featur-uri aditionale (learning plan) implementate cu AI
 
 
