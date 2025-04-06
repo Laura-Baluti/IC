@@ -1,17 +1,19 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import './index.css';
+import Login from './Login';
 
 const App = () => {
   return (
-    <div>
+    <Router>
       <nav className="navbar">
-        <a href="#" className="nav-link">Pagina Principală</a>
-        <a href="#" className="nav-link">Notițe</a>
-        <a href="#" className="nav-link">Learning Plan</a>
-        
-        
+        <div className="nav-links">
+          <a href="/">Pagina Principală</a>
+          <a href="/notite">Notițe</a>
+          <a href="/learning-plan">Learning Plan</a>
+        </div>
         <div className="profile-container">
           <span className="profile-text">Profil</span>
-
           <div className="dropdown">
             <div className="dropdown-content">
               <a href="#">Setări</a>
@@ -21,15 +23,11 @@ const App = () => {
         </div>
       </nav>
 
-
-      <main className="principal">
-        <h1>Bine ai venit!</h1>
-      </main>
-
-
-    </div>
-
-    
+      <Routes>
+        <Route path="/" element={<div>Acasă</div>} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
   );
 };
 
