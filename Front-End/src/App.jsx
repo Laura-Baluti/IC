@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import './index.css';
 import Login from './Login';
 import Register from './Register';
+import Notite from './Notite';
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/notite" element={<Notite />} />
         <Route path="/" element={<div>Acasă</div>} />
       </Routes>
     </Router>
