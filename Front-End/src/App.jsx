@@ -1,33 +1,47 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import './index.css';
 import Login from './Login';
+import Register from './Register';
 
 const App = () => {
   return (
     <Router>
-      <nav className="navbar">
-        <div className="nav-links">
-          <a href="/">Pagina Principală</a>
-          <a href="/notite">Notițe</a>
-          <a href="/learning-plan">Learning Plan</a>
-        </div>
-        <div className="profile-container">
-          <span className="profile-text">Profil</span>
-          <div className="dropdown">
-            <div className="dropdown-content">
-              <a href="#">Setări</a>
-              <a href="#">Deconectare</a>
-            </div>
-          </div>
-        </div>
-      </nav>
-
+      <Navbar />
       <Routes>
-        <Route path="/" element={<div>Acasă</div>} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<div>Acasă</div>} />
       </Routes>
     </Router>
+  );
+};
+
+const Navbar = () => {
+  const location = useLocation(); // Get the current location
+
+  // Conditionally render navbar based on the current route
+  if (location.pathname === "/login" || location.pathname === "/register") {
+    return null; // Don't render navbar on login or register pages
+  }
+
+  return (
+    <nav className="navbar">
+      <div className="nav-links">
+        <a href="/">Pagina Principală</a>
+        <a href="/notite">Notițe</a>
+        <a href="/learning-plan">Learning Plan</a>
+      </div>
+      <div className="profile-container">
+        <span className="profile-text">Profil</span>
+        <div className="dropdown">
+          <div className="dropdown-content">
+            <a href="#">Setări</a>
+            <a href="#">Deconectare</a>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 };
 
