@@ -1,0 +1,127 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+  
+  .modal {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .modal h3 {
+    margin-bottom: 15px;
+    color: #da7b93;
+  }
+  
+  .modal input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .modal-buttons button {
+    padding: 10px 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .modal-buttons button:first-child {
+    background-color: #da7b93;
+    color: white;
+  }
+  
+  .modal-buttons .cancel {
+    background-color: #ccc;
+    color: #333;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .notite-container {
+    display: flex;
+    height: calc(100vh - 80px); /* ajustează în funcție de înălțimea navbar-ului de sus */
+    background-color: #fdfaf6;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #efece9;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .add-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #da7b93;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .add-btn:hover {
+    background-color: #c96b83;
+  }
+  
+  .materii-lista {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .materie-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .materie-item:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .selectata {
+    background-color: #da7b93;
+    color: white;
+  }
+  
+  .continut {
+    flex-grow: 1;
+    padding: 40px;
+  }
+  
