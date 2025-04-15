@@ -26,7 +26,7 @@ const Login = () => {
         if (response.status === 200) {
           alert(response.data); // Backend sends a success message
           // You can redirect to another page if needed
-          navigate("/"); // Redirect to home after successful login
+          navigate("/home"); // Redirect to home after successful login
         }
       } catch (error) {
         // Handle error response from backend
