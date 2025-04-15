@@ -13,7 +13,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/notite" element={<Notite />} />
-        <Route path="/" element={<div>Acasă</div>} />
+        <Route path="/home" element={<div>Acasă</div>} />
       </Routes>
     </Router>
   );
@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-links">
-        <a href="/">Pagina Principală</a>
+        <a href="/home">Pagina Principală</a>
         <a href="/notite">Notițe</a>
         <a href="/learning-plan">Learning Plan</a>
       </div>
@@ -39,7 +39,7 @@ const Navbar = () => {
         <div className="dropdown">
           <div className="dropdown-content">
             <a href="#">Setări</a>
-            <a href="#">Deconectare</a>
+            <a href="/login">Deconectare</a>
           </div>
         </div>
       </div>
