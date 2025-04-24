@@ -2,7 +2,7 @@
     max-width: 400px;
     margin: 80px auto;
     padding: 40px;
-    background-color: #faf6f2;
+    background:linear-gradient(145deg, #5680e9, #5ab9ea, #84ceeb);;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
   }
@@ -19,14 +19,14 @@
   
   .login-form input {
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #71aff5;
     border-radius: 4px;
   }
   
   .login-form button {
     margin-top: 20px;
     padding: 12px;
-    background-color: #da7b93;
+    background-color: #243f84;
     color: white;
     font-weight: bold;
     border: none;
@@ -36,7 +36,7 @@
   }
   
   .login-form button:hover {
-    background-color: #c96b83;
+    background-color: #5680e9;
   }
   
   .register-container {
@@ -48,7 +48,7 @@
     color: white; /* Change the text color */
     font-weight: bold;
     text-decoration: none;
-    background-color: #da7b93; /* Light background color */
+    background: linear-gradient(245deg, #682cd9,  #885bbb); /* Light background color */
     padding: 5px 10px; /* Padding for clickable area */
     border-radius: 4px; /* Rounded corners */
     transition: all 0.3s ease; /* Smooth transition on hover */
@@ -56,6 +56,14 @@
   
   .register-link:hover {
     color: #faf6f2; /* Change text color on hover */
-    background-color: #c96b83; /* Darker background color on hover */
+    background-color: #5680e9; /* Darker background color on hover */
     text-decoration: none; /* Remove underline on hover */
+  }
+
+  body {
+    background-image: url("/images/img12.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
   }
