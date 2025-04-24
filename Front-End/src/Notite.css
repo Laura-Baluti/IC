@@ -12,7 +12,7 @@
   }
   
   .modal {
-    background-color: #fff;
+    background-color: #c1c8e4;
     padding: 30px;
     border-radius: 10px;
     width: 400px;
@@ -22,15 +22,15 @@
   
   .modal h3 {
     margin-bottom: 15px;
-    color: #da7b93;
+    color: #04124d;
   }
   
   .modal input {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #c1c8e4;
+    border-radius: 8px;
   }
   
   .modal-buttons {
@@ -48,13 +48,13 @@
   }
   
   .modal-buttons button:first-child {
-    background-color: #da7b93;
+    background:linear-gradient(245deg, #8aa0d7, #8096eb);;
     color: white;
   }
   
   .modal-buttons .cancel {
-    background-color: #ccc;
-    color: #333;
+    background-color: #04124d;
+    color: #ffffff;
   }
   
   @keyframes fadeIn {
@@ -73,29 +73,30 @@
     height: calc(100vh - 80px); /* ajustează în funcție de înălțimea navbar-ului de sus */
     background-color: #fdfaf6;
   }
-  
+
   .sidebar {
     width: 250px;
-    background-color: #efece9;
     padding: 20px;
     border-right: 1px solid #ddd;
+    background: linear-gradient(135deg, #d9caf7, #6880e2); /* Gradient între alb-crem și albastru deschis */
   }
-  
   .add-btn {
     width: 100%;
     padding: 10px;
-    background-color: #da7b93;
-    color: white;
+    background:  #04124d; /* Gradient de 45 de grade */
+    color: #c1c8e4;
     border: none;
     border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 20px;
+    transition: background 0.3s ease;
   }
   
   .add-btn:hover {
-    background-color: #c96b83;
+    background: linear-gradient(45deg, #8aa0d7, #4377a5); /* Gradient schimbat la hover */
   }
+  
   
   .materii-lista {
     list-style: none;
@@ -106,22 +107,26 @@
     padding: 10px;
     margin-bottom: 10px;
     background-color: white;
+    color:#4377a5;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease;
   }
   
   .materie-item:hover {
-    background-color: #f1f1f1;
+    background-color: #84ceeb;
   }
   
   .selectata {
-    background-color: #da7b93;
+    background-color: #84ceeb;
     color: white;
   }
   
   .continut {
     flex-grow: 1;
     padding: 40px;
+    background-image: url("/images/img12.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
-  
