@@ -41,4 +41,18 @@ public class SubjectController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+    @DeleteMapping("/{name}")
+    public ResponseEntity<String> deleteSubject(
+            @PathVariable String userId,
+            @PathVariable String name) {
+        try {
+            ObjectId objectId = new ObjectId(userId);
+            subjectService.deleteSubjectByUserIdAndName(objectId, name);
+            return ResponseEntity.ok("Subject deleted successfully.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid user ID.");
+        }
+    }
+
 }

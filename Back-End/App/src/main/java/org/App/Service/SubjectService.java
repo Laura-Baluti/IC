@@ -21,4 +21,9 @@ public class SubjectService {
     public Subject addSubject(Subject newSubject) {
         return subjectRepository.save(newSubject);
     }
+
+    public void deleteSubjectByUserIdAndName(ObjectId userId, String name) {
+        subjectRepository.deleteByUserIdAndName(userId, name);
+    }
+
 }

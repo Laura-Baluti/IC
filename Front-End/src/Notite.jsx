@@ -3,64 +3,85 @@ import axios from "axios";
 import './Notite.css';
 
 const Notite = () => {
-  const [materii, setMaterii] = useState([]); // Lista de materii obținută de la backend
+  const [materii, setMaterii] = useState([]);
   const [materieSelectata, setMaterieSelectata] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [showAdaugaModal, setShowAdaugaModal] = useState(false);
+  const [showStergeModal, setShowStergeModal] = useState(false);
   const [materieNoua, setMaterieNoua] = useState("");
-  const [userId, setUserId] = useState(null); // userId-ul de la login (va fi setat după autentificare)
+  const [materieDeSters, setMaterieDeSters] = useState("");
+  const [userId, setUserId] = useState(null);
 
-  // Obține materiile pentru utilizatorul curent după login
   useEffect(() => {
-    const savedUserId = localStorage.getItem("userId"); // Get userId from localStorage
+    const savedUserId = localStorage.getItem("userId");
     if (savedUserId) {
-      setUserId(savedUserId); // Set the userId state
+      setUserId(savedUserId);
     }
   }, []);
 
-  // Obține materiile pentru utilizatorul curent după ce userId a fost setat
   useEffect(() => {
-    const userId = localStorage.getItem("userId"); // Retrieve userId from localStorage
-    console.log("userId:", userId); // Log it to confirm it's correct
-
+    const userId = localStorage.getItem("userId");
     if (userId) {
-        // If userId exists, make the API call to get subjects for this user
-        axios
-            .get(`http://localhost:8080/subjects/${userId}`)
-            .then((response) => {
-                setMaterii(response.data); // Save the subjects in the component state
-            })
-            .catch((error) => {
-                console.error("Eroare la obținerea materiilor: ", error);
-            });
+      axios
+        .get(`http://localhost:8080/subjects/${userId}`)
+        .then((response) => {
+          setMaterii(response.data);
+        })
+        .catch((error) => {
+          console.error("Eroare la obținerea materiilor: ", error);
+        });
     }
-}, []);
+  }, []);
 
-  // Funcția pentru adăugarea unei materii
   const handleAdauga = () => {
     if (materieNoua.trim()) {
-        const subjectData = { name: materieNoua };
-        console.log("Subject data being sent:", subjectData); // Log the subject data
-
-        axios
-            .post(`http://localhost:8080/subjects/${userId}`, subjectData)
-            .then((response) => {
-                setMaterii([...materii, response.data]); // Update the list of subjects
-                setMaterieNoua(""); // Reset the input
-                setShowModal(false); // Close the modal
-            })
-            .catch((error) => {
-                console.error("Error adding subject: ", error.response ? error.response.data : error);
-            });
+      const subjectData = { name: materieNoua };
+      axios
+        .post(`http://localhost:8080/subjects/${userId}`, subjectData)
+        .then((response) => {
+          setMaterii([...materii, response.data]);
+          setMaterieNoua("");
+          setShowAdaugaModal(false);
+        })
+        .catch((error) => {
+          console.error("Error adding subject: ", error);
+        });
     }
-};
+  };
+
+  const handleSterge = () => {
+    if (materieDeSters.trim()) {
+      axios
+        .delete(`http://localhost:8080/subjects/${userId}/${materieDeSters}`)
+        .then(() => {
+          setMaterii(materii.filter((m) => m.name !== materieDeSters));
+          if (materieSelectata?.name === materieDeSters) {
+            setMaterieSelectata(null);
+          }
+          setMaterieDeSters("");
+          setShowStergeModal(false);
+        })
+        .catch((error) => {
+          console.error("Eroare la ștergerea materiei: ", error);
+        });
+    }
+  };
 
   return (
     <div className="notite-container">
       {/* Sidebar */}
       <div className="sidebar">
-        <button className="add-btn" onClick={() => setShowModal(true)}>
+        <button className="add-btn" onClick={() => setShowAdaugaModal(true)}>
           + Adaugă materie
         </button>
+
+        {/* //Raul de aici*/}
+        <button className="add-btn" onClick={() => setShowStergeModal(true)}> 
+          − Șterge materie
+        </button>
+        <p className="section-title">Materiile tale</p>
+        <hr className="separator" />
+        {/* //Raul pana aici*/}
+
         <ul className="materii-lista">
           {materii.map((materie, index) => (
             <li
@@ -68,7 +89,7 @@ const Notite = () => {
               className={`materie-item ${materie === materieSelectata ? 'selectata' : ''}`}
               onClick={() => setMaterieSelectata(materie)}
             >
-              {materie.name} {/* Afișează numele materiei */}
+              {materie.name}
             </li>
           ))}
         </ul>
@@ -86,8 +107,8 @@ const Notite = () => {
         )}
       </div>
 
-      {/* Modal Popup */}
-      {showModal && (
+      {/* Modal pentru Adăugare */}
+      {showAdaugaModal && (
         <div className="modal-overlay">
           <div className="modal">
             <h3>Adaugă o nouă materie</h3>
@@ -99,7 +120,26 @@ const Notite = () => {
             />
             <div className="modal-buttons">
               <button onClick={handleAdauga}>Adaugă</button>
-              <button onClick={() => setShowModal(false)} className="cancel">Anulează</button>
+              <button onClick={() => setShowAdaugaModal(false)} className="cancel">Anulează</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal pentru Ștergere */}
+      {showStergeModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>Șterge o materie</h3>
+            <input
+              type="text"
+              placeholder="Scrie aici numele materiei de șters"
+              value={materieDeSters}
+              onChange={(e) => setMaterieDeSters(e.target.value)}
+            />
+            <div className="modal-buttons">
+              <button onClick={handleSterge}>Șterge</button>
+              <button onClick={() => setShowStergeModal(false)} className="cancel">Anulează</button>
             </div>
           </div>
         </div>
