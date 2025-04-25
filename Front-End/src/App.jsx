@@ -13,7 +13,7 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/notite" element={<Notite />} />
+        <Route path="/subjects" element={<Notite />} />
         <Route path="/home" element={<Home />} />
       </Routes>
     </Router>
@@ -32,7 +32,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-links">
         <a href="/home">Pagina Principală</a>
-        <a href="/notite">Notițe</a>
+        <a href="/subjects">Notițe</a>
         <a href="/learning-plan">Learning Plan</a>
       </div>
       <div className="profile-container">

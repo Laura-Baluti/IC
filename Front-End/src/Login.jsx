@@ -1,38 +1,43 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import axios for HTTP requests
+import axios from 'axios';
 import './Login.css';
-import { useNavigate, Link } from 'react-router-dom'; // Import for page redirection
-
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
-  // State hooks for managing input fields
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(''); // For error handling
-
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (username && password) {
       try {
-        // Send a POST request with username and password to your backend
+        // Send POST request with username and password to your backend
         const response = await axios.post('http://localhost:8080/login', null, {
           params: { username, password }
         });
 
-        // Handle successful response from backend
         if (response.status === 200) {
-          alert(response.data); // Backend sends a success message
-          // You can redirect to another page if needed
-          navigate("/home"); // Redirect to home after successful login
+          // Get the userId from the response body (now inside the object)
+          const userId = response.data.userId; // Expecting { userId: "someUserId" }
+          
+          // Store userId in localStorage
+          localStorage.setItem('userId', userId);
+
+          alert('Autentificare reușită!'); // Optional success message
+          
+          // Redirect to home page
+          navigate("/home");
         }
       } catch (error) {
         // Handle error response from backend
         console.error('Eroare la autentificare:', error);
+        
+        // Check if error response is structured (as per the backend)
         if (error.response) {
-          setError(error.response.data); // Backend sends error message
+          // If the backend sends an error message in the response body, handle it
+          setError(error.response.data.error || "Eroare la autentificare!"); // Assuming error is in { error: "message" }
         }
       }
     } else {
@@ -62,13 +67,13 @@ const Login = () => {
           required
         />
 
-        <button type="submit">Conecteaza-te</button>
+        <button type="submit">Conectează-te</button>
 
         {error && <p className="error-message">{error}</p>} {/* Display error message */}
         
         {/* Register Link */}
         <div className="register-container">
-          <p><Link to="/register" className="register-link">Creeaza un cont!</Link></p>
+          <p><Link to="/register" className="register-link">Creează un cont!</Link></p>
         </div>
       </form>
     </div>

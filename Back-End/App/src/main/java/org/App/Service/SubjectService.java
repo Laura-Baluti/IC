@@ -17,4 +17,8 @@ public class SubjectService {
     public List<Subject> getSubjectsByUserId(ObjectId userId) {
         return subjectRepository.findByUserId(userId);
     }
+
+    public Subject addSubject(Subject newSubject) {
+        return subjectRepository.save(newSubject);
+    }
 }
