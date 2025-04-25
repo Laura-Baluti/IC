@@ -1,132 +1,149 @@
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-  }
-  
-  .modal {
-    background-color: #c1c8e4;
-    padding: 30px;
-    border-radius: 10px;
-    width: 400px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    animation: fadeIn 0.3s ease-in-out;
-  }
-  
-  .modal h3 {
-    margin-bottom: 15px;
-    color: #04124d;
-  }
-  
-  .modal input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #c1c8e4;
-    border-radius: 8px;
-  }
-  
-  .modal-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-  }
-  
-  .modal-buttons button {
-    padding: 10px 15px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .modal-buttons button:first-child {
-    background:linear-gradient(245deg, #8aa0d7, #8096eb);;
-    color: white;
-  }
-  
-  .modal-buttons .cancel {
-    background-color: #04124d;
-    color: #ffffff;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
 
-  .notite-container {
-    display: flex;
-    height: calc(100vh - 80px); /* ajustează în funcție de înălțimea navbar-ului de sus */
-    background-color: #fdfaf6;
-  }
+.modal {
+  background-color: #c1c8e4;
+  padding: 30px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
 
-  .sidebar {
-    width: 250px;
-    padding: 20px;
-    border-right: 1px solid #ddd;
-    background: linear-gradient(135deg, #d9caf7, #6880e2); /* Gradient între alb-crem și albastru deschis */
+.modal h3 {
+  margin-bottom: 15px;
+  color: #04124d;
+}
+
+.modal input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #c1c8e4;
+  border-radius: 8px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-buttons button {
+  padding: 10px 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-buttons button:first-child {
+  background:linear-gradient(245deg, #8aa0d7, #8096eb);;
+  color: white;
+}
+
+.modal-buttons .cancel {
+  background-color: #04124d;
+  color: #ffffff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
   }
-  .add-btn {
-    width: 100%;
-    padding: 10px;
-    background:  #04124d; /* Gradient de 45 de grade */
-    color: #c1c8e4;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 20px;
-    transition: background 0.3s ease;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  .add-btn:hover {
-    background: linear-gradient(45deg, #8aa0d7, #4377a5); /* Gradient schimbat la hover */
-  }
-  
-  
-  .materii-lista {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .materie-item {
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: white;
-    color:#4377a5;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .materie-item:hover {
-    background-color: #84ceeb;
-  }
-  
-  .selectata {
-    background-color: #84ceeb;
-    color: white;
-  }
-  
-  .continut {
-    flex-grow: 1;
-    padding: 40px;
-    background-image: url("/images/img12.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+}
+
+.notite-container {
+  display: flex;
+  height: calc(100vh - 80px); /* ajustează în funcție de înălțimea navbar-ului de sus */
+  background-color: #fdfaf6;
+}
+
+.sidebar {
+  width: 250px;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  background: linear-gradient(135deg, #d9caf7, #6880e2); /* Gradient între alb-crem și albastru deschis */
+}
+.add-btn {
+  width: 100%;
+  padding: 10px;
+  background:  #04124d; /* Gradient de 45 de grade */
+  color: #c1c8e4;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background 0.3s ease;
+}
+
+.add-btn:hover {
+  background: linear-gradient(45deg, #8aa0d7, #4377a5); /* Gradient schimbat la hover */
+}
+
+
+.materii-lista {
+  list-style: none;
+  padding: 0;
+}
+
+.materie-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  color:#4377a5;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.materie-item:hover {
+  background-color: #84ceeb;
+}
+
+.selectata {
+  background-color: #84ceeb;
+  color: white;
+}
+
+.continut {
+  flex-grow: 1;
+  padding: 40px;
+  background-image: url("/images/img12.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Raul de aici in jos */
+.separator {
+  margin: 10px 0;
+  border: none;
+  border-top: 2px solid #04124d;
+  opacity: 0.3;
+}
+
+.section-title {
+  color: #04124d;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-size: 16px;
+  text-align: center;
+}

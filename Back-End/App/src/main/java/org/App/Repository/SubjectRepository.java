@@ -11,4 +11,6 @@ import java.util.List;
 public interface SubjectRepository extends MongoRepository<Subject, ObjectId> {
 
     List<Subject> findByUserId(ObjectId userId);
+
+    void deleteByUserIdAndName(ObjectId userId, String name);
 }
