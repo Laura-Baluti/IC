@@ -13,11 +13,9 @@ public class RegisterController {
     @Autowired
     private UserService userService;
 
-    // POST endpoint for registering a user
     @PostMapping
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
-            // Call the UserService to register the user
             boolean isRegistered = userService.registerUser(user);
 
             if (isRegistered) {
