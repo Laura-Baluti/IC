@@ -53,16 +53,24 @@ const Notite = () => {
       const subjectData = { name: materieNoua };
       axios
         .post(`http://localhost:8080/subjects/${userId}`, subjectData)
-        .then((response) => {
-          setMaterii([...materii, response.data]);
-          setMaterieNoua("");
-          setShowAdaugaModal(false);
+        .then(() => {
+          // După adăugare, facem iar GET ca să luăm toate materiile fresh
+          axios.get(`http://localhost:8080/subjects/${userId}`)
+            .then((response) => {
+              setMaterii(response.data);
+              setMaterieNoua("");
+              setShowAdaugaModal(false);
+            })
+            .catch((error) => {
+              console.error("Eroare la reîncărcarea materiilor: ", error);
+            });
         })
         .catch((error) => {
-          console.error("Error adding subject: ", error);
+          console.error("Eroare la adăugarea materiei: ", error);
         });
     }
   };
+  
 
   const handleSterge = () => {
     if (materieDeSters.trim()) {
