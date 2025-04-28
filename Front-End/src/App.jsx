@@ -6,6 +6,7 @@ import Register from './Register';
 import Notite from './Notite';
 import Home from './Home';
 
+
 const App = () => {
   return (
     <Router>

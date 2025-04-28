@@ -48,6 +48,7 @@ const Notite = () => {
     }
   }, []);
 
+
   const handleAdauga = () => {
     if (materieNoua.trim()) {
       const subjectData = { name: materieNoua };
