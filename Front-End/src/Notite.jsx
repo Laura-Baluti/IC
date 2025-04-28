@@ -2,14 +2,30 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"; 
 import './Notite.css';
 
+/*const Notite = () => {
+   const [materii, setMaterii] = useState(["Matematică", "Fizică"]);
+   const [materieSelectata, setMaterieSelectata] = useState(null);
+   const [showModal, setShowModal] = useState(false);
+   const [materieNoua, setMaterieNoua] = useState("");
+ 
+   const handleAdauga = () => {
+     if (materieNoua.trim()) {
+       setMaterii([...materii, materieNoua]);
+       setMaterieNoua("");
+       setShowModal(false);
+     }
+   };*/
 const Notite = () => {
-  const [materii, setMaterii] = useState([]);
+  const [materii, setMaterii] = useState(["Matematica"]);
   const [materieSelectata, setMaterieSelectata] = useState(null);
   const [showAdaugaModal, setShowAdaugaModal] = useState(false);
   const [showStergeModal, setShowStergeModal] = useState(false);
   const [materieNoua, setMaterieNoua] = useState("");
   const [materieDeSters, setMaterieDeSters] = useState("");
   const [userId, setUserId] = useState(null);
+  const [showAdaugaNotitaModal, setShowAdaugaNotitaModal] = useState(false);
+  const [numeNotita, setNumeNotita] = useState("");
+  const [fisierNotita, setFisierNotita] = useState(null);
 
   useEffect(() => {
     const savedUserId = localStorage.getItem("userId");
@@ -66,6 +82,34 @@ const Notite = () => {
     }
   };
 
+  const handleSalveazaNotita = () => {
+    if (!numeNotita.trim() || !fisierNotita) {
+      alert("Completează numele notiței și selectează un fișier!");
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append("nume", numeNotita);
+    formData.append("fisier", fisierNotita);
+    formData.append("subjectId", materieSelectata.id); // presupunem că materia are id-ul ei
+  
+    axios.post(`http://localhost:8080/notes/${userId}`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+    .then((response) => {
+      alert("Notița a fost adăugată cu succes!");
+      setNumeNotita("");
+      setFisierNotita(null);
+      setShowAdaugaNotitaModal(false);
+      // aici mai târziu putem face să actualizăm lista de notițe
+    })
+    .catch((error) => {
+      console.error("Eroare la salvarea notiței: ", error);
+      alert("A apărut o eroare. Încearcă din nou.");
+    });
+  };
+  
+
   return (
     <div className="notite-container">
       {/* Sidebar */}
@@ -100,7 +144,16 @@ const Notite = () => {
         {materieSelectata ? (
           <div>
             <h2>{materieSelectata.name}</h2>
-            <p>Aici vor apărea notițele pentru această materie.</p>
+              <div>
+                <h2>{materieSelectata.name}</h2>
+                  <button 
+                    className="adauga-notita-btn" 
+                    onClick={() => setShowAdaugaNotitaModal(true)}
+                  >
+                    + Adaugă notiță
+                  </button>
+
+              </div>
           </div>
         ) : (
           <h2>Selectează o materie din stânga</h2>
@@ -119,7 +172,7 @@ const Notite = () => {
               onChange={(e) => setMaterieNoua(e.target.value)}
             />
             <div className="modal-buttons">
-              <button onClick={handleAdauga}>Adaugă</button>
+              <button onClick={handleAdauga} className="adauga">Adaugă</button>
               <button onClick={() => setShowAdaugaModal(false)} className="cancel">Anulează</button>
             </div>
           </div>
@@ -138,12 +191,36 @@ const Notite = () => {
               onChange={(e) => setMaterieDeSters(e.target.value)}
             />
             <div className="modal-buttons">
-              <button onClick={handleSterge}>Șterge</button>
+              <button onClick={handleSterge} className="sterge">Șterge</button>
               <button onClick={() => setShowStergeModal(false)} className="cancel">Anulează</button>
             </div>
           </div>
         </div>
       )}
+    
+
+
+    {showAdaugaNotitaModal && (
+      <div className="modal-overlay">
+        <div className="modal">
+          <h3>Adaugă o notiță pentru {materieSelectata.name}</h3>
+          <input
+            type="text"
+            placeholder="Numele notiței"
+            value={numeNotita}
+            onChange={(e) => setNumeNotita(e.target.value)}
+          />
+          <input
+            type="file"
+            onChange={(e) => setFisierNotita(e.target.files[0])}
+          />
+          <div className="modal-buttons">
+            <button onClick={handleSalveazaNotita} className="adauga">Salvează</button>
+            <button onClick={() => setShowAdaugaNotitaModal(false)} className="cancel">Anulează</button>
+          </div>
+        </div>
+      </div>
+    )}
     </div>
   );
 };

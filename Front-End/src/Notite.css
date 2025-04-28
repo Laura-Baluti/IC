@@ -37,6 +37,7 @@
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  transition: color 3s ease;
 }
 
 .modal-buttons button {
@@ -45,16 +46,28 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: color 3s ease;
 }
 
 .modal-buttons button:first-child {
-  background:linear-gradient(245deg, #8aa0d7, #8096eb);;
+  background-color: #04124d;
   color: white;
 }
 
 .modal-buttons .cancel {
   background-color: #04124d;
   color: #ffffff;
+}
+
+.modal-buttons button:hover{
+  background: linear-gradient(45deg, #8aa0d7, #4377a5);
+}
+
+.modal-buttons .sterge:hover{
+  background: linear-gradient(45deg, #7d071753, #da4949);
+}
+.modal-buttons .adauga:hover{
+  background: linear-gradient(45deg, #31b80f53, #60a365);
 }
 
 @keyframes fadeIn {
@@ -146,4 +159,25 @@
   margin-bottom: 5px;
   font-size: 16px;
   text-align: center;
+}
+
+.adauga-notita-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #04124d;
+  color: #c1c8e4;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.adauga-notita-btn:hover {
+  background: linear-gradient(45deg, #8aa0d7, #4377a5);
+}
+
+.modal input[type="file"] {
+  margin-bottom: 20px;
+  color: #04124d;
 }

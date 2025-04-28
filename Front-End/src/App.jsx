@@ -39,7 +39,7 @@ const Navbar = () => {
         <span className="profile-text">Profil</span>
         <div className="dropdown">
           <div className="dropdown-content">
-            <a href="#">Setări</a>
+            <a href="#">Informatii cont</a>
             <a href="/login">Deconectare</a>
           </div>
         </div>
