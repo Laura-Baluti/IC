@@ -1,16 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import './index.css';
 import Login from './Login';
 import Register from './Register';
 import Notite from './Notite';
 import Home from './Home';
 
+
 const App = () => {
   return (
     <Router>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/subjects" element={<Notite />} />
