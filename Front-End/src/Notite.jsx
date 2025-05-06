@@ -2,26 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"; 
 import './Notite.css';
 
-/*const Notite = () => {
-   const [materii, setMaterii] = useState(["Matematică", "Fizică"]);
-   const [materieSelectata, setMaterieSelectata] = useState(null);
-   const [showModal, setShowModal] = useState(false);
-   const [materieNoua, setMaterieNoua] = useState("");
- 
-   const handleAdauga = () => {
-     if (materieNoua.trim()) {
-       setMaterii([...materii, materieNoua]);
-       setMaterieNoua("");
-       setShowModal(false);
-     }
-   };*/
 const Notite = () => {
-  const [materii, setMaterii] = useState(["Matematica"]);
+  const [materii, setMaterii] = useState([]);
   const [materieSelectata, setMaterieSelectata] = useState(null);
   const [showAdaugaModal, setShowAdaugaModal] = useState(false);
   const [showStergeModal, setShowStergeModal] = useState(false);
   const [materieNoua, setMaterieNoua] = useState("");
   const [materieDeSters, setMaterieDeSters] = useState("");
+  const [materieId, setMaterieId] = useState(null);
   const [userId, setUserId] = useState(null);
   const [showAdaugaNotitaModal, setShowAdaugaNotitaModal] = useState(false);
   const [numeNotita, setNumeNotita] = useState("");
@@ -140,12 +128,22 @@ const Notite = () => {
             <li
               key={index}
               className={`materie-item ${materie === materieSelectata ? 'selectata' : ''}`}
-              onClick={() => setMaterieSelectata(materie)}
+              onClick={() => {
+                setMaterieSelectata(materie); // Set the selected subject
+
+                const materieId = materie.subjectId; // Access subjectId from the materie object
+                setMaterieId(materieId); // Set the materie ID
+                console.log("User ID:", userId);
+                console.log("Selected Materie ID:", materieId); // Log the subjectId (string)
+              }}
             >
               {materie.name}
             </li>
           ))}
         </ul>
+
+
+
       </div>
 
       {/* Conținut */}
@@ -154,7 +152,7 @@ const Notite = () => {
           <div>
             <h2>{materieSelectata.name}</h2>
               <div>
-                <h2>{materieSelectata.name}</h2>
+                
                   <button 
                     className="adauga-notita-btn" 
                     onClick={() => setShowAdaugaNotitaModal(true)}
