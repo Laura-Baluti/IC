@@ -21,7 +21,7 @@ const Login = () => {
         if (response.status === 200) {
           // Get the userId from the response body (now inside the object)
           const userId = response.data.userId; // Expecting { userId: "someUserId" }
-          
+          console.log('User ID: ',userId)
           // Store userId in localStorage
           localStorage.setItem('userId', userId);
 
