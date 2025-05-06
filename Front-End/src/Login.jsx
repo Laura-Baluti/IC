@@ -24,7 +24,7 @@ const Login = () => {
           
           // Store userId in localStorage
           localStorage.setItem('userId', userId);
-
+          localStorage.setItem("userEmail", email);
           alert('Autentificare reușită!'); // Optional success message
           
           // Redirect to home page

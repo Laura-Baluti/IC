@@ -5,7 +5,7 @@ import Login from './Login';
 import Register from './Register';
 import Notite from './Notite';
 import Home from './Home';
-
+import AccountInfo from './AccountInfo';
 
 const App = () => {
   return (
@@ -17,6 +17,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/subjects" element={<Notite />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/account-info" element={<AccountInfo />} />
       </Routes>
     </Router>
   );
@@ -41,7 +42,7 @@ const Navbar = () => {
         <span className="profile-text">Profil</span>
         <div className="dropdown">
           <div className="dropdown-content">
-            <a href="#">Informatii cont</a>
+            <a href="/account-info">Informații cont</a>
             <a href="/login">Deconectare</a>
           </div>
         </div>
