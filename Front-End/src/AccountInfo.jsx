@@ -1,23 +1,31 @@
-// AccountInfo.jsx
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import './AccountInfo.css';
 
 const AccountInfo = () => {
-  const [userEmail, setUserEmail] = useState("");
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    // Simulăm extragerea informațiilor din localStorage
-    const email = localStorage.getItem("userEmail"); // presupunem că ai salvat emailul la login
-    setUserEmail(email || "necunoscut@exemplu.com");
+    const userId = localStorage.getItem("userId");
+
+    if (userId) {
+      axios.get(`http://localhost:8080/account/${userId}`)
+        .then((response) => {
+          setUserData(response.data);
+        })
+        .catch((error) => {
+          console.error("Eroare la preluarea datelor utilizatorului:", error);
+        });
+    }
   }, []);
 
   return (
     <div className="account-info-container">
       <h2>Informații cont</h2>
       <div className="info-section">
-        <p><strong>Email:</strong> {userEmail}</p>
-        <p><strong>Nume:</strong> (de completat...)</p>
-        <p><strong>Parolă:</strong> ******</p>
+        <p><strong>Email:</strong> {userData?.email || "necunoscut"}</p>
+        <p><strong>Nume:</strong> {userData?.username || "necunoscut"}</p>
+        <p><strong>Parolă:</strong> {userData?.password || "******"}</p>
       </div>
     </div>
   );

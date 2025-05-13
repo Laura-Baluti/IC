@@ -9,7 +9,7 @@ const Notite = () => {
   const [showStergeModal, setShowStergeModal] = useState(false);
   const [materieNoua, setMaterieNoua] = useState("");
   const [materieDeSters, setMaterieDeSters] = useState("");
-  const [materieId, setMaterieId] = useState(null);
+  const [subjectId, setSubjectId] = useState(null);
   const [userId, setUserId] = useState(null);
   const [showAdaugaNotitaModal, setShowAdaugaNotitaModal] = useState(false);
   const [numeNotita, setNumeNotita] = useState("");
@@ -86,11 +86,11 @@ const Notite = () => {
     }
   
     const formData = new FormData();
-    formData.append("nume", numeNotita);
-    formData.append("fisier", fisierNotita);
-    formData.append("subjectId", materieSelectata.id); // presupunem că materia are id-ul ei
+    formData.append("name", numeNotita);
+    formData.append("file", fisierNotita);
+    formData.append("subjectId", subjectId); // presupunem că materia are id-ul ei
   
-    axios.post(`http://localhost:8080/notes/${userId}`, formData, {
+    axios.post(`http://localhost:8080/subjects/${userId}/${subjectId}`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     })
     .then((response) => {
@@ -130,11 +130,13 @@ const Notite = () => {
               className={`materie-item ${materie === materieSelectata ? 'selectata' : ''}`}
               onClick={() => {
                 setMaterieSelectata(materie); // Set the selected subject
-
-                const materieId = materie.subjectId; // Access subjectId from the materie object
-                setMaterieId(materieId); // Set the materie ID
+                const subjectId = materie.subjectId; // Access subjectId from the materie object
+                setSubjectId(subjectId); // Set the materie ID
+                localStorage.setItem('subjectId', subjectId);
+                
                 console.log("User ID:", userId);
-                console.log("Selected Materie ID:", materieId); // Log the subjectId (string)
+                console.log("Selected Materie ID:", subjectId); // Log the subjectId (string)
+
               }}
             >
               {materie.name}

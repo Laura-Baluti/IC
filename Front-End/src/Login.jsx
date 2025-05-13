@@ -24,7 +24,7 @@ const Login = () => {
           console.log('User ID: ',userId)
           // Store userId in localStorage
           localStorage.setItem('userId', userId);
-          localStorage.setItem("userEmail", email);
+          //GRESIT localStorage.setItem("userEmail", email);
           alert('Autentificare reușită!'); // Optional success message
           
           // Redirect to home page
