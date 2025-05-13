@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/subjects/{userId}")
@@ -17,11 +20,23 @@ public class SubjectController {
     private SubjectService subjectService;
 
     @GetMapping
-    public ResponseEntity<List<Subject>> getSubjectsForUser(@PathVariable String userId) {
+    public ResponseEntity<List<Map<String, Object>>> getSubjectsForUser(@PathVariable String userId) {
         try {
             ObjectId objectId = new ObjectId(userId);
             List<Subject> subjects = subjectService.getSubjectsByUserId(objectId);
-            return ResponseEntity.ok(subjects);
+
+            // Mapping each subject and converting the subjectId to hex string
+            List<Map<String, Object>> subjectsWithHexId = subjects.stream()
+                    .map(subject -> {
+                        Map<String, Object> subjectMap = new HashMap<>();
+                        subjectMap.put("name", subject.getName());
+                        subjectMap.put("subjectId", subject.getId().toHexString()); // Convert subjectId to hex string
+                        subjectMap.put("userId", subject.getUserId().toHexString());
+                        return subjectMap;
+                    })
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(subjectsWithHexId);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(null);
         }
