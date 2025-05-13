@@ -29,4 +29,9 @@ public class UserService {
         userRepository.save(user);
         return true;
     }
+
+    public User getUserById(String id) {
+        return userRepository.findById(new ObjectId(id)).orElse(null);
+    }
+
 }
