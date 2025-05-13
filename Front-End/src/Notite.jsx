@@ -4,6 +4,7 @@ import './Notite.css';
 
 const Notite = () => {
   const [materii, setMaterii] = useState([]);
+
   const [materieSelectata, setMaterieSelectata] = useState(null);
   const [showAdaugaModal, setShowAdaugaModal] = useState(false);
   const [showStergeModal, setShowStergeModal] = useState(false);
@@ -136,7 +137,6 @@ const Notite = () => {
                 
                 console.log("User ID:", userId);
                 console.log("Selected Materie ID:", subjectId); // Log the subjectId (string)
-
               }}
             >
               {materie.name}
