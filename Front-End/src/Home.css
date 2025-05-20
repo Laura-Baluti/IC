@@ -7,6 +7,7 @@
   color: white;
   min-height: 100vh;
   overflow: hidden;
+  
 }
 
 .left-section {
@@ -22,36 +23,88 @@
   position: relative;
   width: 40%; /* cum am stabilit */
   padding: 40px;
-  background-image: url('/images/ai.png'); /* dacă ai fundal */
+  background: transparent; /* dacă ai fundal */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: visible;
+  overflow-x: hidden;
+
 }
-.learning-btn-container {
-  position: absolute;
-  bottom: 30px;  /* la 30px de jos */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
+
+.learning-plan-box {
+  background-image: 
+  url('/images/ai2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border-radius: 25px;
+  padding: 40px;
+  width: 80%;
+  max-width: 500px;
+  height:500px;
+  margin: auto;
+  margin-top: 50px;
   text-align: center;
+  color: #4a005f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.learning-plan-btn {
-  padding: 12px 28px;
-  background: linear-gradient(90deg, #7b5cff, #b06cff);
-  color: white;
-  font-weight: 600;
+@keyframes animatedBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+.learning-plan-box h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #8300bf;
+}
+
+.learning-plan-box p {
   font-size: 1.1rem;
-  text-decoration: none;
-  border-radius: 10px;
-  box-shadow: 0 6px 15px rgba(123, 92, 255, 0.5);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 25px;
 }
 
-.learning-plan-btn:hover {
-  background: linear-gradient(90deg, #b06cff, #7b5cff);
-  box-shadow: 0 8px 20px rgba(176, 108, 255, 0.7);
+.learning-btn {
+  background: linear-gradient(135deg, #600780, #930c9a, #fe42a0);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.learning-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* opțional: animație tactilă */
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(-30%);
+  }
+  50% {
+    transform: translateY(-35%);
+  }
+}
+
+.monoton-regular {
+  font-family: "Monoton", sans-serif;
+  font-weight: 400;
+  color:white;
+  font-style: normal;
 }
 
 .learning {
@@ -141,15 +194,47 @@
   color: #ffffff;
   z-index: 2;
 }
-
-.text-section h1 {
-  font-size: 2.8rem;
-  color: #ffffff;
-  margin-bottom: 20px;
+.learning-subtext {
+  color: white;
+}
+.circle-container {
+  position: relative;
+  width: 60%;
+  height: 100%;
 }
 
-.text-section p {
-  font-size: 1.4rem;
-  line-height: 1.6;
-  color: #ffffff;
+.glowing-text {
+  position: absolute;
+  top: 52%;
+  left: 28%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  text-shadow: 0 0 8px #fff, 0 0 12px #ff00ff, 0 0 18px #ff00ff;
+  animation: glowFade 6s ease-in-out infinite;
+}
+
+
+.glowing-text h1 {
+  font-size: 2rem;
+  font-family: "Monoton", sans-serif;
+  margin-bottom: 10px;
+}
+
+.glowing-text p {
+  font-size: 1rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Optional: animație ușoară de puls */
+@keyframes glowFade {
+  0%, 100% {
+    text-shadow: 0 0 8px #fff, 0 0 12px #ff00ff, 0 0 18px #ff00ff;
+    opacity: 1;
+  }
+  50% {
+    text-shadow: 0 0 16px #fff, 0 0 24px #ff00ff, 0 0 36px #ff00ff;
+    opacity: 0.85;
+  }
 }

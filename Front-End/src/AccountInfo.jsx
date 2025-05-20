@@ -21,7 +21,7 @@ const AccountInfo = () => {
 
   return (
     <div className="account-info-container">
-      <h2>Informații cont</h2>
+      <h2>INFORMAȚII CONT</h2>
       <div className="info-section">
         <p><strong>Email:</strong> {userData?.email || "necunoscut"}</p>
         <p><strong>Nume:</strong> {userData?.username || "necunoscut"}</p>
