@@ -4,30 +4,32 @@
   padding:0;
 }
 .navbar {
-  background: linear-gradient(to right, #8860d0, #5680e9, #84ceeb); /* Gradient între două culori */
-  color: #fffdef; /* Text alb-crem */
-  padding: 15px;
+  background: transparent;
+  border-bottom: 1px solid white;
+  color: white;
+  padding: 15px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
   font-size: 18px;
+  position: relative;
+  z-index: 10;
 }
 
 .navbar a {
-  color:#fffdef;
+  color: white;
   text-decoration: none;
   font-weight: bold;
   padding: 10px 15px;
   border-radius: 3px;
-  transition: color 1s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .navbar a:hover {
-  background-color:  #9ddaf9;
-  color: #5680e9;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
-
 .profile-container {
   position: relative;
   display: flex;
@@ -42,45 +44,54 @@
   font-weight: bold;
   padding: 10px 15px;
   border-radius: 3px;
-  transition: color 1s ease;
+  transition: background-color 0.3s ease;
+  color: white;
 }
 
 .profile-text:hover {
-  background-color: #9ddaf9;
-  color: #5680e9;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Dropdown Menu */
 .dropdown {
   position: absolute;
   top: 100%;
   right: 0;
   display: none;
-  background-color: #84ceeb;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   min-width: 160px;
-  z-index: 10; /* Pt a fi deasupra altor elemente */
-  border-radius: 3px;
-}
-
-.profile-container:hover .dropdown {
-  display: block; /* Afișează dropdown-ul când treci cu mouse-ul pe Profil */
+  z-index: 10;
+  border-radius: 4px;
 }
 
 .dropdown-content a {
-  color: #fffdef;
+  color: white;
   padding: 10px 20px;
   text-decoration: none;
   display: block;
-  border-bottom: 3px solid white;
-  transition: background-color 1s ease;
+  border-bottom: 1px solid #444;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+.profile-container:hover .dropdown {
+  display: block; /* Afișează dropdown-ul când treci cu mouse-ul pe Profil */
 }
 
 .dropdown-content a:last-child {
   border-bottom: none; /* Îndepărtează border-ul de la ultimul link */
 }
 
-.dropdown-content a:hover {
-  color:#5680e9;
-  background-color: #fffdef;
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #1e003e, #3c1361, #ff0080);
+  background-size: 200% 200%;
+  animation: backgroundMove 10s ease infinite;
+  color: white;
+  min-height: 100vh;
 }
