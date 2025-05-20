@@ -32,21 +32,17 @@ const Home = () => {
 
   return (
     <div className="home-wrapper">
-      <div className="text-section">
-        <h1>Bine ai revenit!</h1>
-        <p>{messages[index]}</p>
-      </div>
-      <div className="carousel">
-        {images.map((img, i) => (
-          <img
-            key={i}
-            src={img}
-            className={`carousel-img ${i === index ? 'active' : ''}`}
-            alt={`Slide ${i + 1}`}
-          />
-        ))}
-      </div>
-    </div>
+  <div className="left-section">
+    <div className="glow-circle"></div>
+  </div>
+
+  <div className="right-section">
+  <div className="learning-btn-container">
+    <a href="/learning-plan" className="learning-plan-btn">Learning Plan</a>
+  </div>
+</div>
+</div>
+
   );
 };
 
