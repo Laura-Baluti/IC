@@ -34,11 +34,18 @@ const Home = () => {
     <div className="home-wrapper">
   <div className="left-section">
     <div className="glow-circle"></div>
+      <div className="glowing-text">
+    <h1 className="monoton-regular">EXPLOREAZĂ.</h1>
+     <h1 className="monoton-regular">ÎNVAȚĂ.</h1>
+      <h1 className="monoton-regular">CREȘTE.</h1>
   </div>
+      </div>
 
   <div className="right-section">
-  <div className="learning-btn-container">
-    <a href="/learning-plan" className="learning-plan-btn">Learning Plan</a>
+  <div className="learning-plan-box">
+    <h1 className="monoton-regular">LEARNING PLAN</h1>
+    <p className="learning-subtext">Învață ușor cu ajutorul inteligenței artificiale!</p>
+    <a href="/learning-plan" className="learning-btn">Vezi planul</a>
   </div>
 </div>
 </div>

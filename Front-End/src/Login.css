@@ -2,9 +2,11 @@
     max-width: 400px;
     margin: 80px auto;
     padding: 40px;
-    background:linear-gradient(145deg, #5680e9, #5ab9ea, #84ceeb);;
+    background-image: 
+    url('/images/ai2.png');
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    color: white;
   }
   
   .login-form {
@@ -26,7 +28,7 @@
   .login-form button {
     margin-top: 20px;
     padding: 12px;
-    background-color: #243f84;
+    background-color: #502b69;
     color: white;
     font-weight: bold;
     border: none;
@@ -36,7 +38,7 @@
   }
   
   .login-form button:hover {
-    background-color: #5680e9;
+    background-color: #4114e0;
   }
   
   .register-container {
