@@ -34,4 +34,19 @@ public class UserService {
         return userRepository.findById(new ObjectId(id)).orElse(null);
     }
 
+    public boolean updateUserPhoto(String userId, String photo) {
+        Optional<User> userOptional = userRepository.findById(new ObjectId(userId));
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setPhoto(photo);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
+    public String getUserPhoto(String userId) {
+        Optional<User> userOptional = userRepository.findById(new ObjectId(userId));
+        return userOptional.map(User::getPhoto).orElse(null);
+    }
 }
