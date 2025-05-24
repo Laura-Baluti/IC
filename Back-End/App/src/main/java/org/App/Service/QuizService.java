@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public final class QuizService {
 
-    //Adaug manual string-urile, nu merge cu .env
+    //Adaug manual string-urile; nu merge cu .env
     static String key = "";
     static String endpoint = "";
     static String model = "";;
