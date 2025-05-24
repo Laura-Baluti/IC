@@ -17,18 +17,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public final class QuizService {
 
-    @Value("${KEY}")
-    static String key;
-    @Value("${ENDPOINT}")
-    static String endpoint;
-    @Value("${MODEL}")
-    static String model;
+    //Adaug manual string-urile, nu merge cu .env
+    static String key = "";
+    static String endpoint = "";
+    static String model = "";;
 
     private static final String TEST_IMAGE_PATH = "C:\\Users\\raulb\\Desktop\\Poza.jpg";
     private static final String TEST_IMAGE_FORMAT = "jpg";
