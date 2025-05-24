@@ -29,8 +29,8 @@ public class FileService {
     }
 
     // Get a file by its ID
-    public Optional<File> getFileById(ObjectId id) {
-        return fileRepository.findById(id);
+    public File getFileById(ObjectId fileId) {
+        return fileRepository.findById(fileId).orElse(null);
     }
 
     // Get all files associated with a specific subject
