@@ -16,7 +16,11 @@ const Notite = () => {
   const [showAdaugaNotitaModal, setShowAdaugaNotitaModal] = useState(false);
   const [fisierNotita, setFisierNotita] = useState(null);
   const [notiteMaterie, setNotiteMaterie] = useState([]);
-const [notitaVizibila, setNotitaVizibila] = useState(null);
+  const [notitaVizibila, setNotitaVizibila] = useState(null);
+  
+  const [showStergeNotitaModal, setShowStergeNotitaModal] = useState(false);
+  const [numeNotitaDeSters, setNumeNotitaDeSters] = useState("");
+
 
   useEffect(() => {
     const savedUserId = localStorage.getItem("userId");
@@ -114,6 +118,31 @@ const [notitaVizibila, setNotitaVizibila] = useState(null);
       alert("A apărut o eroare. Încearcă din nou.");
     });
   };
+
+  const handleStergeNotita = () => {
+    if (!numeNotitaDeSters.trim()) {
+      alert("Introdu numele notiței de șters.");
+      return;
+    }
+  
+    axios
+      .delete(`http://localhost:8080/subjects/${userId}/${subjectId}/${numeNotitaDeSters}`)
+      .then(() => {
+        alert("Notița a fost ștearsă cu succes!");
+        // Refetch updated list
+        return axios.get(`http://localhost:8080/subjects/${userId}/${subjectId}`);
+      })
+      .then((res) => {
+        setNotiteMaterie(res.data);
+        setNumeNotitaDeSters("");
+        setShowStergeNotitaModal(false);
+      })
+      .catch((error) => {
+        console.error("Eroare la ștergerea notiței:", error);
+        alert("Nu s-a putut șterge notița.");
+      });
+  };
+  
   
 
   return (
@@ -176,6 +205,14 @@ const [notitaVizibila, setNotitaVizibila] = useState(null);
                   >
                     + Adaugă notiță
                   </button>
+
+                  <button 
+                    className="sterge-notita-btn" 
+                    onClick={() => setShowStergeNotitaModal(true)}
+                  >
+                    − Șterge notiță
+                  </button>
+
 
               </div>
           </div>
@@ -278,6 +315,25 @@ const [notitaVizibila, setNotitaVizibila] = useState(null);
         </div>
       </div>
     )}
+
+    {showStergeNotitaModal && (
+      <div className="modal-overlay">
+        <div className="modal">
+          <h3>Șterge notiță din {materieSelectata.name}</h3>
+          <input
+            type="text"
+            placeholder="Numele fișierului exact (ex: notita.pdf)"
+            value={numeNotitaDeSters}
+            onChange={(e) => setNumeNotitaDeSters(e.target.value)}
+          />
+          <div className="modal-buttons">
+            <button onClick={handleStergeNotita} className="sterge">Șterge</button>
+            <button onClick={() => setShowStergeNotitaModal(false)} className="cancel">Anulează</button>
+          </div>
+        </div>
+      </div>
+    )}
+
     </div>
   );
 };
