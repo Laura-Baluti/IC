@@ -14,6 +14,8 @@ const Notite = () => {
   const [showAdaugaNotitaModal, setShowAdaugaNotitaModal] = useState(false);
   const [numeNotita, setNumeNotita] = useState("");
   const [fisierNotita, setFisierNotita] = useState(null);
+  const [notiteMaterie, setNotiteMaterie] = useState([]);
+const [notitaVizibila, setNotitaVizibila] = useState(null);
 
   useEffect(() => {
     const savedUserId = localStorage.getItem("userId");
@@ -133,7 +135,14 @@ const Notite = () => {
                 const subjectId = materie.subjectId; // Access subjectId from the materie object
                 setSubjectId(subjectId); // Set the materie ID
                 localStorage.setItem('subjectId', subjectId);
-                
+                axios.get(`http://localhost:8080/notes/${subjectId}`)
+                .then((res) => {
+                  setNotiteMaterie(res.data);
+                })
+                .catch((err) => {
+                  console.error("Eroare la încărcarea notițelor:", err);
+                });
+
                 console.log("User ID:", userId);
                 console.log("Selected Materie ID:", subjectId); // Log the subjectId (string)
 
@@ -166,6 +175,21 @@ const Notite = () => {
           </div>
         ) : (
           <h2>Selectează o materie din stânga</h2>
+        )}
+        {notiteMaterie.length > 0 && (
+          <div style={{ marginTop: '20px' }}>
+            <h3>Notițele tale:</h3>
+            {notiteMaterie.map((notita, i) => (
+              <button
+                key={i}
+                className="notita-btn"
+                onClick={() => setNotitaVizibila(notita)}
+                style={{ margin: '10px', padding: '10px', cursor: 'pointer' }}
+              >
+                {notita.name}
+              </button>
+            ))}
+          </div>
         )}
       </div>
 
@@ -207,7 +231,24 @@ const Notite = () => {
         </div>
       )}
     
-
+      {notitaVizibila && (
+        <div className="modal-overlay" onClick={() => setNotitaVizibila(null)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h3>{notitaVizibila.name}</h3>
+            <a
+              href={`http://localhost:8080/uploads/${notitaVizibila.filename}`} // ajustează în funcție de backend
+              target="_blank"
+              rel="noopener noreferrer"
+              className="adauga-notita-btn"
+            >
+              Deschide notița
+            </a>
+            <div className="modal-buttons">
+              <button onClick={() => setNotitaVizibila(null)} className="cancel">Închide</button>
+            </div>
+          </div>
+        </div>
+      )}
 
     {showAdaugaNotitaModal && (
       <div className="modal-overlay">
