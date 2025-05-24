@@ -182,3 +182,16 @@
   margin-bottom: 20px;
   color: #04124d;
 }
+
+.notita-btn {
+  background: #e6cbe1;
+  border: 1px solid #a54390;
+  color: #310459;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.notita-btn:hover {
+  background: linear-gradient(145deg, #d68fc4, #8d31d3);
+  color: white;
+}
