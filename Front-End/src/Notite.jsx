@@ -73,6 +73,7 @@ const Notite = () => {
       axios
         .delete(`http://localhost:8080/subjects/${userId}/${materieDeSters}`)
         .then(() => {
+          window.location.reload();
           setMaterii(materii.filter((m) => m.name !== materieDeSters));
           if (materieSelectata?.name === materieDeSters) {
             setMaterieSelectata(null);
