@@ -1,6 +1,7 @@
 package org.App.Controller;
 
 import org.App.Model.Subject;
+import org.App.Service.FileService;
 import org.App.Service.SubjectService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class SubjectController {
 
     @Autowired
     private SubjectService subjectService;
+    @Autowired
+    private FileService fileService;
+
 
     @GetMapping
     public ResponseEntity<List<Map<String, Object>>> getSubjectsForUser(@PathVariable String userId) {
@@ -63,6 +67,21 @@ public class SubjectController {
             @PathVariable String name) {
         try {
             ObjectId objectId = new ObjectId(userId);
+
+            // Get subject to extract its ID before deletion
+            List<Subject> subjects = subjectService.getSubjectsByUserId(objectId);
+            Subject subjectToDelete = subjects.stream()
+                    .filter(s -> s.getName().equals(name))
+                    .findFirst()
+                    .orElse(null);
+
+            if (subjectToDelete == null) {
+                return ResponseEntity.notFound().build();
+            }
+
+            // Delete files attached to this subject
+            fileService.deleteFilesBySubjectId(subjectToDelete.getId().toHexString());
+
             subjectService.deleteSubjectByUserIdAndName(objectId, name);
             return ResponseEntity.ok("Subject deleted successfully.");
         } catch (IllegalArgumentException e) {

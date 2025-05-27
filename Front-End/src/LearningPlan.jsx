@@ -6,17 +6,44 @@ const LearningPlan = () => {
   const [raspuns, setRaspuns] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleTrimite = () => {
+  const handleTrimite = async () => {
     if (!intrebare.trim()) return;
 
     setLoading(true);
-    setRaspuns(""); // șterge răspunsul anterior
+    setRaspuns(""); // clear previous answer
 
-    // simulăm un răspuns AI (ex: folosim timeout)
-    setTimeout(() => {
-      setRaspuns(`Răspuns AI pentru: "${intrebare}" 😎`);
+    const fileId = localStorage.getItem("fileId"); // get fileId from localStorage
+    if (!fileId) {
+      setRaspuns("File ID not found in local storage!");
       setLoading(false);
-    }, 1500);
+      return;
+    }
+
+    try {
+      // Build the URL with fileId and send question as query param
+      const backendUrl = "http://localhost:8080"; 
+      const url = `${backendUrl}/learning-plan/${fileId}?question=${encodeURIComponent(intrebare)}`;
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Server error");
+      }
+
+      const answer = await response.text();
+      setRaspuns(answer);
+
+    } catch (error) {
+      setRaspuns("Eroare la comunicarea cu serverul: " + error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

@@ -61,7 +61,7 @@ public class FileController {
     @DeleteMapping("/{name}")
     public ResponseEntity<String> deleteFile(@PathVariable String subjectId, @PathVariable String name) {
         try {
-            boolean isDeleted = fileService.deleteFileByName(subjectId, name);
+            boolean isDeleted = fileService.deleteFileBySubjectIdName(subjectId, name);
             if (isDeleted) {
                 return ResponseEntity.ok("File deleted successfully.");
             } else {
