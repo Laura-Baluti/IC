@@ -1,0 +1,51 @@
+.learning-plan-container {
+    padding: 40px;
+    background-image:url('/images/ai5.png'); 
+    height: calc(100vh - 80px);
+    background-size: cover; /* sau contain, auto, etc. */
+    background-repeat: no-repeat;
+    background-position: center;
+  
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.textbox-intrebare,
+.textbox-raspuns {
+  width: 100%;
+  min-height: 120px;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+}
+
+.textbox-raspuns {
+  background-color: #f3e5f5;
+}
+
+.btn-trimite {
+  background: linear-gradient(#3f1b9a,#9e62c4 );
+  color: white;
+  padding: 10px 25px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.btn-trimite:hover {
+  background-color: #8e24aa;
+}
+
+.loading-msg {
+  color: #ffffff;
+  font-style: italic;
+}

@@ -6,7 +6,7 @@ import Register from './Register';
 import Notite from './Notite';
 import Home from './Home';
 import AccountInfo from './AccountInfo';
-
+import LearningPlan from './LearningPlan';
 
 const App = () => {
   return (
@@ -19,6 +19,7 @@ const App = () => {
         <Route path="/subjects" element={<Notite />} />
         <Route path="/home" element={<Home />} />
         <Route path="/account" element={<AccountInfo />} />
+        <Route path="/learning-plan" element={<LearningPlan />} />
       </Routes>
     </Router>
   );
