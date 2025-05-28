@@ -1,17 +1,32 @@
 .learning-plan-container {
-    padding: 40px;
-    background-image:url('/images/ai5.png'); 
-    height: calc(100vh - 80px);
-    background-size: cover; /* sau contain, auto, etc. */
-    background-repeat: no-repeat;
-    background-position: center;
-  
+  padding: 40px;
+  background-image: url('/images/ai5.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
+  font-family: "Monoton", sans-serif;
   margin-bottom: 20px;
   color: #ffffff;
+  text-shadow: 0 0 15px #fff, 0 0 15px #d06bd0, 0 0 18px #c35bc3;
+  animation: glowFade 6s ease-in-out infinite;
+}
+
+.dropdowns {
+  margin-bottom: 20px;
+}
+
+select {
+  background: linear-gradient(35deg, #11bfd2,#2441cd, #6d0ec6 );
+  padding: 10px;
+  font-size: 1rem;
+  margin-right: 10px;
+  border-radius: 8px;
+  color:white;
 }
 
 .textbox-intrebare,
@@ -28,6 +43,7 @@ h2 {
 
 .textbox-raspuns {
   background-color: #f3e5f5;
+  min-height: 200px;
 }
 
 .btn-trimite {
@@ -35,17 +51,13 @@ h2 {
   color: white;
   padding: 10px 25px;
   font-size: 1rem;
+  margin-bottom: 10px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 20px;
-}
-
-.btn-trimite:hover {
-  background-color: #8e24aa;
 }
 
 .loading-msg {
-  color: #ffffff;
+  color: #fff;
   font-style: italic;
 }
