@@ -29,8 +29,8 @@ public class FileService {
     }
 
     // Get a file by its ID
-    public Optional<File> getFileById(ObjectId id) {
-        return fileRepository.findById(id);
+    public File getFileById(ObjectId fileId) {
+        return fileRepository.findById(fileId).orElse(null);
     }
 
     // Get all files associated with a specific subject
@@ -39,12 +39,24 @@ public class FileService {
     }
 
     // Delete a file by its name and subject ID
-    public boolean deleteFileByName(String subjectId, String name) {
+    public boolean deleteFileBySubjectIdName(String subjectId, String name) {
         Optional<File> file = fileRepository.findBySubjectIdAndName(new ObjectId(subjectId), name);
         if (file.isPresent()) {
             fileRepository.delete(file.get());
             return true;
         }
         return false;
+    }
+
+    public boolean deleteFilesBySubjectId(String subjectId) {
+        ObjectId subjectObjectId = new ObjectId(subjectId);
+        List<File> files = fileRepository.findBySubjectId(subjectObjectId);
+
+        if (files.isEmpty()) {
+            return false;
+        }
+
+        fileRepository.deleteAll(files);
+        return true;
     }
 }

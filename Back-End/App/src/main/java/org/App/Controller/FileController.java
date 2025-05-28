@@ -61,7 +61,7 @@ public class FileController {
     @DeleteMapping("/{name}")
     public ResponseEntity<String> deleteFile(@PathVariable String subjectId, @PathVariable String name) {
         try {
-            boolean isDeleted = fileService.deleteFileByName(subjectId, name);
+            boolean isDeleted = fileService.deleteFileBySubjectIdName(subjectId, name);
             if (isDeleted) {
                 return ResponseEntity.ok("File deleted successfully.");
             } else {
@@ -71,4 +71,26 @@ public class FileController {
             return ResponseEntity.badRequest().body("Invalid subjectId or file name.");
         }
     }
+
+    @GetMapping("/download/{fileId}")
+    public ResponseEntity<byte[]> getFileContent(@PathVariable String fileId) {
+        try {
+            ObjectId fileObjectId = new ObjectId(fileId);
+            File file = fileService.getFileById(fileObjectId);
+
+            if (file == null) {
+                return ResponseEntity.notFound().build();
+            }
+
+            // Return the file content as bytes, with the correct Content-Type
+            return ResponseEntity.ok()
+                    .header("Content-Disposition", "inline; filename=\"" + file.getName() + "\"")
+                    .header("Content-Type", file.getContentType())
+                    .body(file.getContent().getData()); // assuming getContent() returns Binary and getData() returns byte[]
+
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 }

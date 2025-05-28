@@ -28,21 +28,44 @@ const LearningPlan = () => {
       .catch(err => console.error("Eroare notițe:", err));
   };
   
-
   const handleTrimite = async () => {
+    if (!intrebare.trim()) return;
+
     setLoading(true);
-    try {
-      const response = await axios.post('http://localhost:8080/ai/question', {
-        question: intrebare,
-        subject: materieSelectata.name,
-        note: notitaSelectata
-      });
-      setRaspuns(response.data.answer);
-    } catch (error) {
-      console.error("Eroare AI:", error);
-      setRaspuns("A apărut o eroare.");
+    setRaspuns(""); // clear previous answer
+
+    const fileId = localStorage.getItem("fileId"); // get fileId from localStorage
+    if (!fileId) {
+      setRaspuns("File ID not found in local storage!");
+      setLoading(false);
+      return;
     }
-    setLoading(false);
+
+    try {
+      // Build the URL with fileId and send question as query param
+      const backendUrl = "http://localhost:8080"; 
+      const url = `${backendUrl}/learning-plan/${fileId}?question=${encodeURIComponent(intrebare)}`;
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Server error");
+      }
+
+      const answer = await response.text();
+      setRaspuns(answer);
+
+    } catch (error) {
+      setRaspuns("Eroare la comunicarea cu serverul: " + error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

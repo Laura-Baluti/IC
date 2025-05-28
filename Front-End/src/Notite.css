@@ -163,7 +163,9 @@
 }
 
 .adauga-notita-btn {
-  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 10px;
+  margin-top: 10px;
   padding: 10px 20px;
   background-color: #04124d;
   color: #c1c8e4;
@@ -175,6 +177,24 @@
 }
 
 .adauga-notita-btn:hover {
+  background: linear-gradient(45deg, #8aa0d7, #4377a5);
+}
+
+.sterge-notita-btn {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #04124d;
+  color: #c1c8e4;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.sterge-notita-btn:hover {
   background: linear-gradient(45deg, #8aa0d7, #4377a5);
 }
 
@@ -190,6 +210,7 @@
   font-weight: bold;
   border-radius: 8px;
   transition: all 0.3s ease;
+  
 }
 .notita-btn:hover {
   background: linear-gradient(145deg, #d68fc4, #8d31d3);
