@@ -38,7 +38,7 @@ const Navbar = () => {
       <div className="nav-links">
         <a href="/home">Pagina Principală</a>
         <a href="/subjects">Notițe</a>
-        <a href="/learning-plan">Learning Plan</a>
+        <a href="/learning-plan">Învață cu AI</a>
       </div>
       <div className="profile-container">
         <span className="profile-text">Profil</span>

@@ -43,9 +43,9 @@ const Home = () => {
 
   <div className="right-section">
   <div className="learning-plan-box">
-    <h1 className="monoton-regular">LEARNING PLAN</h1>
-    <p className="learning-subtext">Învață ușor cu ajutorul inteligenței artificiale!</p>
-    <a href="/learning-plan" className="learning-btn">Vezi planul</a>
+    <h1 className="monoton-regular">LEARN WITH AI</h1>
+    <p className="learning-subtext">Lasă inteligența artificială să te ghideze în procesul tău de învățare!</p>
+    <a href="/learning-plan" className="learning-btn">Vezi ghidul tău AI</a>
   </div>
 </div>
 </div>
