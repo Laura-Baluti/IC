@@ -26,4 +26,8 @@ public class SubjectService {
         subjectRepository.deleteByUserIdAndName(userId, name);
     }
 
+    public Subject getSubjectById(ObjectId subjectId) {
+        return subjectRepository.findById(subjectId).orElse(null);
+    }
+
 }

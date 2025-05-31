@@ -7,6 +7,7 @@ const LearningPlan = () => {
   const [notite, setNotite] = useState([]);
   const [materieSelectata, setMaterieSelectata] = useState("");
   const [notitaSelectata, setNotitaSelectata] = useState("");
+  const [notitaId, setNotitaId] = useState("");
   const [intrebare, setIntrebare] = useState("");
   const [raspuns, setRaspuns] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,7 +24,7 @@ const LearningPlan = () => {
   
   const handleSelectMaterie = (materie) => {
     setMaterieSelectata(materie);
-    axios.get(`http://localhost:8080/notes/${materie.subjectId}`)
+    axios.get(`http://localhost:8080/learning-plan/find/${materie.subjectId}`)
       .then((res) => setNotite(res.data))
       .catch(err => console.error("Eroare notițe:", err));
   };
@@ -83,10 +84,14 @@ const LearningPlan = () => {
         </select>
 
         {notite.length > 0 && (
-          <select onChange={(e) => setNotitaSelectata(e.target.value)}>
+          <select onChange={(e) => {
+            setNotitaSelectata(e.target.value);
+            console.log(e.target.value);
+            localStorage.setItem("fileId",e.target.value)
+          }}>
             <option value="">Selectează o notiță</option>
             {notite.map((notita, index) => (
-              <option key={index} value={notita.name}>
+              <option key={index} value={notita.fileId}>
                 {notita.name}
               </option>
             ))}
@@ -96,7 +101,7 @@ const LearningPlan = () => {
 
       <textarea
         className="textbox-intrebare"
-        placeholder="Scrie întrebarea ta pentru AI..."
+        placeholder="Scrie întrebarea ta pentru AI:"
         value={intrebare}
         onChange={(e) => setIntrebare(e.target.value)}
       />
@@ -109,7 +114,7 @@ const LearningPlan = () => {
 
       <textarea
         className="textbox-raspuns"
-        placeholder="Aici va apărea testul generat de AI:"
+        placeholder="Aici va apărea textul generat de AI:"
         value={raspuns}
         readOnly
       />
