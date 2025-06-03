@@ -1,8 +1,7 @@
 .home-wrapper {
   display: flex;
   height: calc(100vh - 80px);
- background: linear-gradient(135deg, #1e003e, #3c1361, #ff0080);
-  background-size: 200% 200%;
+ background: linear-gradient(173deg, #1e003e, #3c1361, #dd0bda);
   animation: backgroundMove 10s ease infinite;
   color: white;
   min-height: 100vh;
