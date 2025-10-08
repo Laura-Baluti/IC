@@ -33,4 +33,13 @@ public class UserService {
     public User getUserById(String id) {
         return userRepository.findById(new ObjectId(id)).orElse(null);
     }
+
+    public boolean deleteUserById(String id) {
+        ObjectId objectId = new ObjectId(id);
+        if (userRepository.existsById(objectId)) {
+            userRepository.deleteById(objectId);
+            return true;
+        }
+        return false;
+    }
 }

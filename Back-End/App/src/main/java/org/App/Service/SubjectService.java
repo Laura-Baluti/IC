@@ -1,5 +1,6 @@
 package org.App.Service;
 
+import org.App.Model.File;
 import org.App.Model.Subject;
 import org.App.Repository.SubjectRepository;
 import org.bson.types.ObjectId;
@@ -13,6 +14,9 @@ public class SubjectService {
 
     @Autowired
     private SubjectRepository subjectRepository;
+
+    @Autowired
+    private FileService fileService;
 
     public List<Subject> getSubjectsByUserId(ObjectId userId) {
         return subjectRepository.findByUserId(userId);
@@ -30,4 +34,19 @@ public class SubjectService {
         return subjectRepository.findById(subjectId).orElse(null);
     }
 
+    public boolean deleteSubjectsByUserId(String userId) {
+        ObjectId userObjectId = new ObjectId(userId);
+        List<Subject> subjects = subjectRepository.findByUserId(userObjectId);
+
+        if (subjects.isEmpty()) {
+            return false;
+        }
+
+        for (Subject subject : subjects) {
+            fileService.deleteFilesBySubjectId(subject.getId().toHexString());
+        }
+
+        subjectRepository.deleteAll(subjects);
+        return true;
+    }
 }

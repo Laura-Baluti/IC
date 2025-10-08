@@ -19,6 +19,27 @@ const AccountInfo = () => {
     }
   }, []);
 
+  const handleDeleteUser = async () => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      alert("Nu s-a găsit ID-ul utilizatorului în localStorage!");
+      return;
+    }
+
+    const confirmDelete = window.confirm("Ești sigur că vrei să ștergi acest cont? Această acțiune este ireversibilă.");
+    if (!confirmDelete) return;
+
+    try {
+      await axios.delete(`http://localhost:8080/account/${userId}`);
+      alert("Contul tău a fost șters cu succes!");
+      localStorage.clear();
+      window.location.href = "/"; // redirect to home/login
+    } catch (error) {
+      console.error("Eroare la ștergerea contului:", error);
+      alert("A apărut o eroare la ștergerea contului.");
+    }
+  };
+
   return (
     <div className="account-info-container">
       <h2>INFORMAȚII CONT</h2>
@@ -27,6 +48,9 @@ const AccountInfo = () => {
         <p><strong>Nume:</strong> {userData?.username || "necunoscut"}</p>
         <p><strong>Parolă:</strong> {userData?.password || "******"}</p>
       </div>
+      <button className="delete-user-btn" onClick={handleDeleteUser}>
+          Șterge contul
+        </button>
     </div>
   );
 };

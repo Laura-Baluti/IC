@@ -28,4 +28,22 @@
     font-size: 1.2rem;
     margin-bottom: 15px;
   }
+
+  .delete-user-btn {
+    margin-left: 0px;
+    margin-right: 10px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #04124d;
+    color: #c1c8e4;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .delete-user-btn:hover {
+    background: linear-gradient(45deg, #da4949, #da4949);
+  }
   
