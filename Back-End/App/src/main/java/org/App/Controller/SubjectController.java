@@ -1,6 +1,7 @@
 package org.App.Controller;
 
 import org.App.Model.Subject;
+import org.App.Service.FastFileService;
 import org.App.Service.FileService;
 import org.App.Service.SubjectService;
 import org.bson.types.ObjectId;
@@ -21,6 +22,8 @@ public class SubjectController {
     private SubjectService subjectService;
     @Autowired
     private FileService fileService;
+    @Autowired
+    private FastFileService fastFileService;
 
 
     @GetMapping
@@ -81,6 +84,8 @@ public class SubjectController {
 
             // Delete files attached to this subject
             fileService.deleteFilesBySubjectId(subjectToDelete.getId().toHexString());
+
+            fastFileService.deleteFastFilesBySubjectId(subjectToDelete.getId().toHexString());
 
             subjectService.deleteSubjectByUserIdAndName(objectId, name);
             return ResponseEntity.ok("Subject deleted successfully.");
