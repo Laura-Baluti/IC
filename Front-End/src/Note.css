@@ -1,0 +1,176 @@
+.note-container {
+  display: flex;
+  height: calc(100vh - 80px);
+  background: linear-gradient(135deg, #1f043c, #000000, #290529);
+}
+
+.sidebar2 {
+  width: 400px;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  background-image: url('/images/a.jpg');
+}
+
+.materii-lista {
+  list-style: none;
+  padding: 0;
+}
+
+.materie-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  color: #4377a5;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.materie-item:hover,
+.selectata {
+  background-color: #84ceeb;
+  color: white;
+}
+
+.continut {
+  flex-grow: 1;
+  padding: 40px;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+
+.separator {
+  margin: 10px 0;
+  border: none;
+  border-top: 2px solid #ffffff;
+  opacity: 0.5;
+}
+
+.section-title {
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.adauga-nota-btn,
+.sterge-nota-btn {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #04124d;
+  color: #c1c8e4;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.adauga-nota-btn:hover,
+.sterge-nota-btn:hover {
+  background: linear-gradient(45deg, #8aa0d7, #4377a5);
+}
+
+/* Lista note */
+.lista-note {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.nota-card {
+  background: #e6cbe1;
+  border: 1px solid #a54390;
+  border-radius: 10px;
+  padding: 15px;
+  color: #310459;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nota-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.nota-valoare {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.nota-descriere {
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+.nota-data {
+  font-size: 0.8rem;
+  color: #4b356e;
+  margin-top: 8px;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal {
+  background: linear-gradient(45deg, #e6cbe1, #a54390);
+  padding: 30px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal h3 {
+  margin-bottom: 15px;
+  color: #04124d;
+}
+
+.modal input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #a11ac6;
+  border-radius: 8px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-buttons button {
+  padding: 10px 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-buttons .adauga {
+  background-color: #310459;
+  color: white;
+}
+
+.modal-buttons .cancel {
+  background-color: #310459;
+  color: #ffffff;
+}
+
+.modal-buttons button:hover {
+  background: linear-gradient(145deg, #dbabd3, #8d31d3);
+}
