@@ -7,6 +7,7 @@ import Notite from './Notite';
 import Home from './Home';
 import AccountInfo from './AccountInfo';
 import LearningPlan from './LearningPlan';
+import Note from './Note';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/account" element={<AccountInfo />} />
         <Route path="/learning-plan" element={<LearningPlan />} />
+        <Route path="/note" element={<Note />} />
       </Routes>
     </Router>
   );
@@ -39,6 +41,7 @@ const Navbar = () => {
         <a href="/home">Pagina Principală</a>
         <a href="/subjects">Notițe</a>
         <a href="/learning-plan">Învață cu AI</a>
+        <a href="/note">Notele tale</a>
       </div>
       <div className="profile-container">
         <span className="profile-text">Profil</span>
