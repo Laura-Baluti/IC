@@ -6,13 +6,11 @@ const Note = () => {
   const [materii, setMaterii] = useState([]);
   const [materieSelectata, setMaterieSelectata] = useState(null);
   const [noteMaterie, setNoteMaterie] = useState([]);
-
-  const [notaNoua, setNotaNoua] = useState("");
-  const [descriereNoua, setDescriereNoua] = useState("");
-
   const [showAdaugaNotaModal, setShowAdaugaNotaModal] = useState(false);
   const [showStergeNotaModal, setShowStergeNotaModal] = useState(false);
-  const [notaDeSters, setNotaDeSters] = useState("");
+  const [notaNoua, setNotaNoua] = useState("");
+  const [descriereNoua, setDescriereNoua] = useState("");
+  const [descriereDeSters, setDescriereDeSters] = useState("");
 
   const userId = localStorage.getItem("userId");
 
@@ -27,52 +25,131 @@ const Note = () => {
 
   const handleSelectMaterie = (materie) => {
     setMaterieSelectata(materie);
-
+    localStorage.setItem("subjectId", materie.subjectId);
+    
+    // Fetch grades for the selected subject
     axios
-      .get(`http://localhost:8080/grades/${userId}/${materie.subjectId}`)
+      .get(`http://localhost:8080/api/grades/${materie.subjectId}`)
       .then((res) => setNoteMaterie(res.data))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error("Error fetching grades:", err);
+        setNoteMaterie([]);
+      });
   };
 
-  const handleAdaugaNota = () => {
+  // Load previously selected subject on component mount
+  useEffect(() => {
+    const savedSubjectId = localStorage.getItem("subjectId");
+    if (savedSubjectId && materii.length > 0) {
+      const savedMaterie = materii.find(m => m.subjectId === savedSubjectId);
+      if (savedMaterie) {
+        setMaterieSelectata(savedMaterie);
+        // Fetch grades for the saved subject
+        axios
+          .get(`http://localhost:8080/api/grades/${savedSubjectId}`)
+          .then((res) => setNoteMaterie(res.data))
+          .catch((err) => {
+            console.error("Error loading saved grades:", err);
+            setNoteMaterie([]);
+          });
+      }
+    }
+  }, [materii]);
+
+  const handleAdaugaNotaClick = () => {
+    setShowAdaugaNotaModal(true);
+  };
+
+  const handleSaveGrade = async () => {
     if (!notaNoua.trim() || isNaN(parseFloat(notaNoua))) {
       alert("Introduceți o notă validă!");
       return;
     }
-
-    const data = {
+  
+    const subjectId = localStorage.getItem("subjectId");
+    if (!subjectId || !materieSelectata) {
+      alert("Nu a fost selectată o materie!");
+      return;
+    }
+  
+    const gradeData = {
       value: parseFloat(notaNoua),
       description: descriereNoua || "Evaluare",
     };
-
-    axios
-      .post(`http://localhost:8080/grades/${userId}/${materieSelectata.subjectId}`, data)
-      .then(() => {
+  
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/api/grades/add/${subjectId}`,
+        gradeData
+      );
+      
+      if (response.data.success) {
+        alert("Nota a fost adăugată cu succes!");
         setNotaNoua("");
         setDescriereNoua("");
         setShowAdaugaNotaModal(false);
-        return axios.get(`http://localhost:8080/grades/${userId}/${materieSelectata.subjectId}`);
-      })
-      .then((res) => setNoteMaterie(res.data))
-      .catch((err) => console.error(err));
+        // Refetch grades after adding
+        axios
+          .get(`http://localhost:8080/api/grades/${subjectId}`)
+          .then((res) => setNoteMaterie(res.data))
+          .catch((err) => console.error("Error refetching grades:", err));
+      }
+    } catch (error) {
+      console.error("Error adding grade:", error);
+      alert("Eroare la adăugarea notei: " + (error.response?.data?.error || error.message));
+    }
   };
 
-  const handleStergeNota = () => {
-    if (!notaDeSters.trim()) {
+  const handleStergeNotaClick = () => {
+    if (!materieSelectata) {
+      alert("Selectează mai întâi o materie!");
+      return;
+    }
+    setShowStergeNotaModal(true);
+  };
+
+  const handleDeleteGrade = async () => {
+    if (!descriereDeSters.trim()) {
       alert("Introdu descrierea exactă a notei de șters!");
       return;
     }
 
-    axios
-      .delete(`http://localhost:8080/grades/${userId}/${materieSelectata.subjectId}/${notaDeSters}`)
-      .then(() => {
+    const subjectId = localStorage.getItem("subjectId");
+    if (!subjectId) {
+      alert("Nu a fost selectată o materie!");
+      return;
+    }
+
+    try {
+      const response = await axios.delete(
+        `http://localhost:8080/api/grades/delete/${subjectId}/${encodeURIComponent(descriereDeSters)}`
+      );
+      
+      if (response.data.success) {
         alert("Nota a fost ștearsă cu succes!");
+        setDescriereDeSters("");
         setShowStergeNotaModal(false);
-        setNotaDeSters("");
-        return axios.get(`http://localhost:8080/grades/${userId}/${materieSelectata.subjectId}`);
-      })
-      .then((res) => setNoteMaterie(res.data))
-      .catch((err) => console.error(err));
+        // Refetch grades after deletion
+        axios
+          .get(`http://localhost:8080/api/grades/${subjectId}`)
+          .then((res) => setNoteMaterie(res.data))
+          .catch((err) => console.error("Error refetching grades:", err));
+      }
+    } catch (error) {
+      console.error("Error deleting grade:", error);
+      alert("Eroare la ștergerea notei: " + (error.response?.data?.error || error.message));
+    }
+  };
+
+  const handleCloseAdaugaModal = () => {
+    setShowAdaugaNotaModal(false);
+    setNotaNoua("");
+    setDescriereNoua("");
+  };
+
+  const handleCloseStergeModal = () => {
+    setShowStergeNotaModal(false);
+    setDescriereDeSters("");
   };
 
   return (
@@ -102,42 +179,41 @@ const Note = () => {
             <div>
               <button
                 className="adauga-nota-btn"
-                onClick={() => setShowAdaugaNotaModal(true)}
+                onClick={handleAdaugaNotaClick}
               >
                 + Adaugă notă
               </button>
               <button
                 className="sterge-nota-btn"
-                onClick={() => setShowStergeNotaModal(true)}
+                onClick={handleStergeNotaClick}
               >
                 − Șterge notă
               </button>
             </div>
-
-            <div className="lista-note">
-              {noteMaterie.length > 0 ? (
-                noteMaterie.map((n, i) => (
-                  <div key={i} className="nota-card">
-                    <div className="nota-valoare">{n.value}</div>
-                    <div className="nota-descriere">{n.description}</div>
-                    <div className="nota-data">
-                      {new Date(n.date).toLocaleDateString()}
+            {noteMaterie.length > 0 ? (
+              <div style={{ marginTop: '20px' }}>
+                <h3>Notele tale:</h3>
+                <div className="lista-note">
+                  {noteMaterie.map((n, i) => (
+                    <div key={i} className="nota-card">
+                      <div className="nota-valoare">{n.value}</div>
+                      <div className="nota-descriere">{n.description}</div>
                     </div>
-                  </div>
-                ))
-              ) : (
-                <p style={{ marginTop: "20px", color: "#fff" }}>
-                  Nu există note pentru această materie.
-                </p>
-              )}
-            </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <p style={{ marginTop: "20px", color: "#fff" }}>
+                Nu există note pentru această materie.
+              </p>
+            )}
           </div>
         ) : (
           <h2>Selectează o materie din stânga</h2>
         )}
       </div>
 
-      {/* Modal Adaugă */}
+      {/* Modal for adding grade */}
       {showAdaugaNotaModal && (
         <div className="modal-overlay">
           <div className="modal">
@@ -145,7 +221,9 @@ const Note = () => {
             <input
               type="number"
               step="0.01"
-              placeholder="Nota (ex: 9.75)"
+              min="0"
+              max="10"
+              placeholder="Nota (0-10)"
               value={notaNoua}
               onChange={(e) => setNotaNoua(e.target.value)}
             />
@@ -156,13 +234,10 @@ const Note = () => {
               onChange={(e) => setDescriereNoua(e.target.value)}
             />
             <div className="modal-buttons">
-              <button onClick={handleAdaugaNota} className="adauga">
+              <button onClick={handleSaveGrade} className="adauga">
                 Adaugă
               </button>
-              <button
-                onClick={() => setShowAdaugaNotaModal(false)}
-                className="cancel"
-              >
+              <button onClick={handleCloseAdaugaModal} className="cancel">
                 Anulează
               </button>
             </div>
@@ -170,7 +245,7 @@ const Note = () => {
         </div>
       )}
 
-      {/* Modal Ștergere */}
+      {/* Modal for deleting grade */}
       {showStergeNotaModal && (
         <div className="modal-overlay">
           <div className="modal">
@@ -178,17 +253,14 @@ const Note = () => {
             <input
               type="text"
               placeholder="Descrierea exactă (ex: Test 1)"
-              value={notaDeSters}
-              onChange={(e) => setNotaDeSters(e.target.value)}
+              value={descriereDeSters}
+              onChange={(e) => setDescriereDeSters(e.target.value)}
             />
             <div className="modal-buttons">
-              <button onClick={handleStergeNota} className="sterge">
+              <button onClick={handleDeleteGrade} className="sterge">
                 Șterge
               </button>
-              <button
-                onClick={() => setShowStergeNotaModal(false)}
-                className="cancel"
-              >
+              <button onClick={handleCloseStergeModal} className="cancel">
                 Anulează
               </button>
             </div>
