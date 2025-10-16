@@ -21,6 +21,9 @@ public class SubjectService {
     @Autowired
     private FastFileService fastFileService;
 
+    @Autowired
+    private GradeService gradeService;
+
     public List<Subject> getSubjectsByUserId(ObjectId userId) {
         return subjectRepository.findByUserId(userId);
     }
@@ -48,6 +51,7 @@ public class SubjectService {
         for (Subject subject : subjects) {
             fileService.deleteFilesBySubjectId(subject.getId().toHexString());
             fastFileService.deleteFastFilesBySubjectId(subject.getId().toHexString());
+            gradeService.deleteGradesBySubjectId(subject.getId().toHexString());
         }
 
         subjectRepository.deleteAll(subjects);
